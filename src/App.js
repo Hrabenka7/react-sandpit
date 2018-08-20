@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Radium, {StyleRoot } from 'radium';
 import './App.css';
 import Country from './Country/Country'; 
 
@@ -12,6 +13,19 @@ class App extends Component {
     showCountries: false
   }
 
+  toggleCountriesHandler = () => {
+    const doesShow = this.state.showCountries;
+    this.setState({showCountries: !doesShow})
+  }
+
+  
+  deleteCountryHandler = (countryIndex) => {
+    // ES6 const countries = [...this.state.persons]
+    const countries = this.state.countries.slice();   //list of countries, slice creates new Array(copy)
+    countries.splice(countryIndex, 1);    // removing country under certain index, 1 country only
+    this.setState({countries: countries})    // updating the list of countries
+  }
+
 
   nameChangedHandler = (event, id) => {
     const countryIndex = this.state.countries.findIndex( c => {
@@ -19,7 +33,7 @@ class App extends Component {
     });
 
     const country = {
-      //spread opp for a new object, to not mutate dirrectly
+      //spread opp for a new object, to not mutate directly
       ...this.state.countries[countryIndex]
     } 
 
@@ -29,31 +43,23 @@ class App extends Component {
     this.setState({ countries: countries})
   }
 
-  deleteCountryHandler = (countryIndex) => {
-    // ES6 const countries = [...this.state.persons]
-    const countries = this.state.countries.slice();   //list of countries, slice creates new Array(copy)
-    countries.splice(countryIndex, 1);    // removing country under certain index, 1 country only
-    this.setState({countries: countries})    // updating the list of countries
-  }
-
-  toggleCountriesHandler = () => {
-    const doesShow = this.state.showCountries;
-    this.setState({showCountries: !doesShow})
-  }
-
-
 
   render() {
     const style = {
       backgroundColor: 'white',
+      color: 'green',
       font: 'inherit',
-      border: '1px solid purple',
+      border: '2px solid green',
       padding: '8px',
       cursor: 'pointer',
-      margin: '8px'
+      margin: '8px',
+      ':hover': {
+        backgroundColor: 'lightgreen',
+        color: 'black'
+      }
     };
 
-    // countries are not displayed
+    // countries are not displayedá
     let countries= null;
 
     if (this.state.showCountries) {
@@ -70,27 +76,45 @@ class App extends Component {
               })}
         </div>
       );
+      style.border = "2px solid red";
+      style.color = "red";
+      style[':hover'] = {
+        backgroundColor: 'lightcoral',
+        color: 'black'
+      };
+      
     }
     
+    const classes = [];
+    if(this.state.countries.length <= 2) {
+      classes.push('red') 
+    }
+    if (this.state.countries.length <= 1) {
+      classes.push('bold')
+    }
+
     return (
+      <StyleRoot>
       <div className="App">
       <h1> Country Population </h1>
-      
+      <p className={classes.join(' ')}>This is a React Application </p> {/* className must be a string not array! */}
+
       <button
         style = {style}
         onClick={this.toggleCountriesHandler}
-        > Show Countries
+        > Toggle Countries
       </button>
       {countries}
 
       </div>
+      </StyleRoot>
     );
     
     
   }
 }
 
-export default App;
+export default Radium(App);
 
 /* Compiled looks like this: 
 return React.createElement('div', {className: 'App'}, React.createElement('h1', null, 'Some testing text')); */
