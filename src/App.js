@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './App.css';
+import classes from './App.css';
 import Country from './Country/Country'; 
 
 class App extends Component {
@@ -76,18 +76,18 @@ class App extends Component {
       
     }
     
-    const classes = [];
+    const assignedClasses = [];
     if(this.state.countries.length <= 2) {
-      classes.push('red') 
+      assignedClasses.push(classes.red) 
     }
     if (this.state.countries.length <= 1) {
-      classes.push('bold')
+      assignedClasses.push(classes.bold)
     }
 
     return (
-      <div className="App">
+      <div className={classes.App}>
       <h1> Country Population </h1>
-      <p className={classes.join(' ')}>This is a React Application </p> {/* className must be a string not array! */}
+      <p className={assignedClasses.join(' ')}>This is a React Application </p> {/* className must be a string not array! */}
 
       <button
         style = {style}

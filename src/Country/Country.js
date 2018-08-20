@@ -1,9 +1,9 @@
 import React from 'react'; 
-import './Country.css'
+import classes from './Country.css'
 
 const country= (props) => {
     return (
-        <div className="Country">
+        <div className={classes.Country}>
             <p onClick={props.click}> {props.population} of people live in {props.name}</p>
             <p> {props.children} </p>
             <input type="text" onChange={props.changed} value={props.name} />
