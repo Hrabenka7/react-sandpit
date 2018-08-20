@@ -44,18 +44,10 @@ class App extends Component {
 
 
   render() {
-    const style = {
-      backgroundColor: 'white',
-      color: 'green',
-      font: 'inherit',
-      border: '2px solid green',
-      padding: '8px',
-      cursor: 'pointer',
-      margin: '8px',
-    };
 
     // countries are not displayedá
     let countries= null;
+    let btnClass = '';
 
     if (this.state.showCountries) {
       countries = (
@@ -71,9 +63,7 @@ class App extends Component {
               })}
         </div>
       );
-      style.border = "2px solid red";
-      style.color = "red";
-      
+      btnClass = classes.Red
     }
     
     const assignedClasses = [];
@@ -90,7 +80,7 @@ class App extends Component {
       <p className={assignedClasses.join(' ')}>This is a React Application </p> {/* className must be a string not array! */}
 
       <button
-        style = {style}
+        className={btnClass}
         onClick={this.toggleCountriesHandler}
         > Toggle Countries
       </button>
