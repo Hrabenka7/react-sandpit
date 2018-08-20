@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import classes from './App.css';
 import Country from './Country/Country'; 
+import ErrorBoundary  from './ErrorBoundary.js/ErrorBoundary'
 
 class App extends Component {
   state = {
@@ -53,13 +54,14 @@ class App extends Component {
       countries = (
         <div>
           {this.state.countries.map((country, index) => {
-            return <Country 
+            return <ErrorBoundary key={country.id}>
+              <Country 
               click = {() => this.deleteCountryHandler(index)}
               name={country.name}
               population={country.population}
-              key={country.id}
               changed={(event) => this.nameChangedHandler(event, country.id)}
-                />
+              />
+              </ErrorBoundary>
               })}
         </div>
       );
