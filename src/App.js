@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import Radium, {StyleRoot } from 'radium';
 import './App.css';
 import Country from './Country/Country'; 
 
@@ -53,10 +52,6 @@ class App extends Component {
       padding: '8px',
       cursor: 'pointer',
       margin: '8px',
-      ':hover': {
-        backgroundColor: 'lightgreen',
-        color: 'black'
-      }
     };
 
     // countries are not displayedá
@@ -78,10 +73,6 @@ class App extends Component {
       );
       style.border = "2px solid red";
       style.color = "red";
-      style[':hover'] = {
-        backgroundColor: 'lightcoral',
-        color: 'black'
-      };
       
     }
     
@@ -94,7 +85,6 @@ class App extends Component {
     }
 
     return (
-      <StyleRoot>
       <div className="App">
       <h1> Country Population </h1>
       <p className={classes.join(' ')}>This is a React Application </p> {/* className must be a string not array! */}
@@ -107,14 +97,13 @@ class App extends Component {
       {countries}
 
       </div>
-      </StyleRoot>
     );
     
     
   }
 }
 
-export default Radium(App);
+export default App;
 
 /* Compiled looks like this: 
 return React.createElement('div', {className: 'App'}, React.createElement('h1', null, 'Some testing text')); */
