@@ -5,6 +5,20 @@ import CountryList from '../components/CountryList/CountryList';
 import Cockpit from '../components/Cockpit/Cockpit'
 
 class App extends Component {
+  constructor(props) {
+    super(props);
+    console.log('[App.js] Inside Constructor', props);
+    // possible initialize this.state = ... here. Needs super(props) beforehand
+  }
+
+  componentWillMount() {
+    console.log('[App.js] Inside componentWillMount()')
+  }
+
+  componentDidMount() {
+    console.log('[App.js] Inside componentDidMount()')
+  }
+
   state = {
     countries: [
       { id: '1', name: 'Czechia', population: 10.6 + 'M'},
@@ -47,9 +61,8 @@ class App extends Component {
 
  // ########################################## RENDER ################################################ //
   render() {
-
-    // countries are not displayed
-    let countries= null;
+    console.log('[App.js] Inside render()');
+    let countries= null; // countries are not displayed
 
     if (this.state.showCountries) {
       countries = <CountryList
