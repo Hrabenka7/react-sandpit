@@ -1,10 +1,10 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import classes from './App.css';
 // components
 import CountryList from '../components/CountryList/CountryList';
 import Cockpit from '../components/Cockpit/Cockpit'
 
-class App extends Component {
+class App extends PureComponent {
   constructor(props) {
     super(props);
     console.log('[App.js] Inside Constructor', props);
@@ -19,10 +19,11 @@ class App extends Component {
     console.log('[App.js] Inside componentDidMount()')
   }
 
-  shouldComponentUpdate(nextProps, nextState){
-    console.log('[UPDATE App.js] Inside shouldComponentUpdate()', nextProps, nextState)
-    return true;
-  }
+  // shouldComponentUpdate(nextProps, nextState){
+  //   console.log('[UPDATE App.js] Inside shouldComponentUpdate()', nextProps, nextState)
+  //   return nextState.countries !== this.state.countries ||
+  //   nextState.showCountries !== this.state.showCountries;
+  // }
 
   componentWillUpdate(nextProps,nextState) {
     console.log('[UPDATE App.js] Inside componentWillUpdate()', nextProps, nextState) 
@@ -86,6 +87,7 @@ class App extends Component {
     
     return (
       <div className={classes.App}>
+      <button onClick={() => {this.setState({showCountries: true})}}>Show Countries</button>
         <Cockpit
         appTitle = {this.props.title} 
         showCountries ={this.state.showCountries}

@@ -24,7 +24,9 @@ class CountryList extends Component {
 
       shouldComponentUpdate(nextProps, nextState){
         console.log('[UPDATE CountryList.js] Inside shouldComponentUpdate()', nextProps, nextState)
-        return nextProps.countries !== this.props.countries;
+        return nextProps.countries !== this.props.countries ||
+        nextProps.changed !== this.props.changed ||
+        nextProps.clicked !== this.props
       }
 
       componentWillUpdate(nextProps,nextState) {
