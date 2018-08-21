@@ -17,6 +17,25 @@ class CountryList extends Component {
         console.log('[CountryList.js] Inside componentDidMount()')
       }
 
+
+      componentWillReceiveProps(nextProps) {
+        console.log('[UPDATE CountryList.js] Inside componentWillReceiveProps()', nextProps)
+      }
+
+      shouldComponentUpdate(nextProps, nextState){
+        console.log('[UPDATE CountryList.js] Inside shouldComponentUpdate()', nextProps, nextState)
+        return nextProps.countries !== this.props.countries;
+      }
+
+      componentWillUpdate(nextProps,nextState) {
+        console.log('[UPDATE CountryList.js] Inside componentWillUpdate()', nextProps, nextState) 
+      }
+
+      componentDidUpdate() {
+        console.log('[UPDATE CountryList.js] Inside componentDidUpdate()')
+      }
+
+
     render() {
         console.log('[CountryList.js] Inside render()')
         return this.props.countries.map((country, index) => {
