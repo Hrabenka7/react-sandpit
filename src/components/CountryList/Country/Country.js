@@ -2,11 +2,7 @@ import React from 'react';
 import classes from './Country.css'
 
 const country= (props) => {
-    // const rnd = Math.random();
-
-    // if (rnd > 0.7) {
-    //     throw new Error ('Something went wrong')
-    // }
+   
 
     return (
         <div className={classes.Country}>
@@ -19,3 +15,12 @@ const country= (props) => {
 
 export default country; 
 
+    /* before return statement, for error boundary
+    
+    const rnd = Math.random();
+     if (rnd > 0.7) 
+     {
+        throw new Error ('Something went wrong')
+     } 
+    
+     */

@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import classes from './App.css';
-import Country from './Country/Country'; 
-import ErrorBoundary  from './ErrorBoundary.js/ErrorBoundary'
+// components
+import CountryList from '../components/CountryList/CountryList';
+import Cockpit from '../components/Cockpit/Cockpit'
 
 class App extends Component {
   state = {
@@ -13,11 +14,7 @@ class App extends Component {
     showCountries: false
   }
 
-  toggleCountriesHandler = () => {
-    const doesShow = this.state.showCountries;
-    this.setState({showCountries: !doesShow})
-  }
-
+  // ########################################## METHODS ################################################ //
   
   deleteCountryHandler = (countryIndex) => {
     // ES6 const countries = [...this.state.persons]
@@ -26,72 +23,50 @@ class App extends Component {
     this.setState({countries: countries})    // updating the list of countries
   }
 
-
+  
   nameChangedHandler = (event, id) => {
     const countryIndex = this.state.countries.findIndex( c => {
       return c.id === id
     });
-
+    
     const country = {
       //spread opp for a new object, to not mutate directly
       ...this.state.countries[countryIndex]
     } 
-
     country.name = event.target.value
     const countries = [...this.state.countries];
     countries[countryIndex] = country;
     this.setState({ countries: countries})
   }
+  
+  toggleCountriesHandler = () => {
+    const doesShow = this.state.showCountries;
+    this.setState({showCountries: !doesShow})
+  }
 
 
+ // ########################################## RENDER ################################################ //
   render() {
 
-    // countries are not displayedá
+    // countries are not displayed
     let countries= null;
-    let btnClass = '';
 
     if (this.state.showCountries) {
-      countries = (
-        <div>
-          {this.state.countries.map((country, index) => {
-            return <ErrorBoundary key={country.id}>
-              <Country 
-              click = {() => this.deleteCountryHandler(index)}
-              name={country.name}
-              population={country.population}
-              changed={(event) => this.nameChangedHandler(event, country.id)}
-              />
-              </ErrorBoundary>
-              })}
-        </div>
-      );
-      btnClass = classes.Red
+      countries = <CountryList
+        countries={this.state.countries}
+        clicked={this.deleteCountryHandler}
+        changed={this.nameChangedHandler} />
     }
     
-    const assignedClasses = [];
-    if(this.state.countries.length <= 2) {
-      assignedClasses.push(classes.red) 
-    }
-    if (this.state.countries.length <= 1) {
-      assignedClasses.push(classes.bold)
-    }
-
     return (
       <div className={classes.App}>
-      <h1> Country Population </h1>
-      <p className={assignedClasses.join(' ')}>This is a React Application </p> {/* className must be a string not array! */}
-
-      <button
-        className={btnClass}
-        onClick={this.toggleCountriesHandler}
-        > Toggle Countries
-      </button>
-      {countries}
-
+        <Cockpit 
+        showCountries ={this.state.showCountries}
+        countries = {this.state.countries}
+        clicked = {this.toggleCountriesHandler} />
+        {countries}
       </div>
     );
-    
-    
   }
 }
 
