@@ -2,6 +2,8 @@ import React, {Component} from 'react';
 import classes from './Country.css';
 import PropTypes from 'prop-types';
 
+import {AuthContext} from '../../../containers/App';
+
 class Country extends Component {
     constructor(props) {
         super(props);
@@ -26,7 +28,11 @@ class Country extends Component {
         console.log('[Country.js] Inside render()')
         return (
             <div className={classes.Country}>
-            {this.props.authenticated ? <p>Authenticated!</p>:null}
+                <AuthContext.Consumer>
+                    {/* {this.props.authenticated ? <p>Authenticated!</p>:null} manually passed value  */}
+                    { auth => auth ? <p>Authenticated!</p>:null}  
+                </AuthContext.Consumer>
+
                 <p onClick={this.props.click}> {this.props.population} of people live in {this.props.name}</p>
                 <p> {this.props.children} </p>
                 <input 

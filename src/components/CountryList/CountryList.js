@@ -48,7 +48,8 @@ class CountryList extends Component {
             population={country.population}
             key={country.id}
             changed={(event) => this.props.changed(event, country.id)}
-            authenticated = {this.props.isAuthenticated}/>
+            //authenticated = {this.props.isAuthenticated} manually passed value
+            />
         });
     }
 }

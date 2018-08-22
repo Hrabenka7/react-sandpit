@@ -4,35 +4,43 @@ import classes from './App.css';
 import CountryList from '../components/CountryList/CountryList';
 import Cockpit from '../components/Cockpit/Cockpit'
 
+export const AuthContext = React.createContext(false);
+
 class App extends PureComponent {
   constructor(props) {
-    super(props);
-    
+    super(props);    
     console.log('[App.js] Inside Constructor', props);
     // possible initialize this.state = ... here. Needs super(props) beforehand
   }
 
+
   componentWillMount() {
     console.log('[App.js] Inside componentWillMount()')
   }
-
   componentDidMount() {
     console.log('[App.js] Inside componentDidMount()')
   }
-
-  // shouldComponentUpdate(nextProps, nextState){
-  //   console.log('[UPDATE App.js] Inside shouldComponentUpdate()', nextProps, nextState)
-  //   return nextState.countries !== this.state.countries ||
-  //   nextState.showCountries !== this.state.showCountries;
-  // }
-
+  /* shouldComponentUpdate(nextProps, nextState){
+     console.log('[UPDATE App.js] Inside shouldComponentUpdate()', nextProps, nextState)
+     return nextState.countries !== this.state.countries ||
+     nextState.showCountries !== this.state.showCountries;
+   } */
   componentWillUpdate(nextProps,nextState) {
     console.log('[UPDATE App.js] Inside componentWillUpdate()', nextProps, nextState) 
+  }
+  static getDerivedStateFromProps(nextProps, prevState) {
+    console.log('[UPDATE App.js] Inside  getDerivedStateFromProps()', nextProps, prevState);
+    return prevState 
+  }
+
+  getSnapshotBeforeUpdate(){
+    console.log('[UPDATE App.js] Inside getSnapshotBeforeUpdate()')
   }
 
   componentDidUpdate() {
     console.log('[UPDATE App.js] Inside componentDidUpdate()')
   }
+
 
   state = {
     countries: [
@@ -97,7 +105,8 @@ class App extends PureComponent {
         countries={this.state.countries}
         clicked={this.deleteCountryHandler}
         changed={this.nameChangedHandler}
-        isAuthenticated={this.state.authenticated} />
+        //isAuthenticated={this.state.authenticated} manually passed value
+        />
     }
     
     return (
@@ -109,7 +118,9 @@ class App extends PureComponent {
         countries = {this.state.countries}
         login={this.loginHandler}
         clicked = {this.toggleCountriesHandler} />
+        <AuthContext.Provider value={this.state.authenticated}>
         {countries}
+        </AuthContext.Provider>
       </div>
     );
   }
