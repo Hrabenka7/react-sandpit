@@ -1,5 +1,6 @@
 import React, {Component} from 'react'; 
-import classes from './Country.css'
+import classes from './Country.css';
+import PropTypes from 'prop-types';
 
 class Country extends Component {
     constructor(props) {
@@ -26,6 +27,13 @@ class Country extends Component {
         )
     }    
 }
+
+Country.propTypes = {
+    click: PropTypes.func,
+    population: PropTypes.string,
+    name: PropTypes.string,
+    changed: PropTypes.func
+};
 
 export default Country; 
 
