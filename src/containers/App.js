@@ -7,6 +7,7 @@ import Cockpit from '../components/Cockpit/Cockpit'
 class App extends PureComponent {
   constructor(props) {
     super(props);
+    
     console.log('[App.js] Inside Constructor', props);
     // possible initialize this.state = ... here. Needs super(props) beforehand
   }
@@ -39,7 +40,8 @@ class App extends PureComponent {
       { id: '2', name: 'Slovakia', population: 5.4 + 'M'},
       { id: '3', name: 'Spain', population: 46.5 + 'M'},
     ],
-    showCountries: false
+    showCountries: false,
+    toggleClickCounter: 0,
   }
 
   // ########################################## METHODS ################################################ //
@@ -69,7 +71,12 @@ class App extends PureComponent {
   
   toggleCountriesHandler = () => {
     const doesShow = this.state.showCountries;
-    this.setState({showCountries: !doesShow})
+    this.setState( (prevState, props) => {
+      return {
+        showCountries: !doesShow,
+        toggleClickCounter: prevState.toggleClickCounter + 1
+      }
+    });
   }
 
 
@@ -86,7 +93,7 @@ class App extends PureComponent {
     }
     
     return (
-      <div className={classes.App}>
+      <div className={classes.App}> {/*Could use <React.Fragment> tag insted of div R16+*/}
       <button onClick={() => {this.setState({showCountries: true})}}>Show Countries</button>
         <Cockpit
         appTitle = {this.props.title} 
