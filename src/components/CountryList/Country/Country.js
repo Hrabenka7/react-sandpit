@@ -6,7 +6,8 @@ class Country extends Component {
     constructor(props) {
         super(props);
         console.log('[Country.js] Inside Constructor', props);
-        // possible initialize this.state = ... here. Needs super(props) beforehand
+        this.inputElement = React.createRef();
+        
       }
     
       componentWillMount() {
@@ -15,14 +16,23 @@ class Country extends Component {
     
       componentDidMount() {
         console.log('[Country.js] Inside componentDidMount()')
+        if (this.props.position === 0) {
+            this.inputElement.current.focus();
+        }
       }
+
+
     render() {
         console.log('[Country.js] Inside render()')
         return (
             <div className={classes.Country}>
                 <p onClick={this.props.click}> {this.props.population} of people live in {this.props.name}</p>
                 <p> {this.props.children} </p>
-                <input type="text" onChange={this.props.changed} value={this.props.name} />
+                <input 
+                    ref = {this.inputElement}
+                    type="text" 
+                    onChange={this.props.changed} 
+                    value={this.props.name} />
             </div>
         )
     }    

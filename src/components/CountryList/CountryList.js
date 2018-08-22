@@ -44,6 +44,7 @@ class CountryList extends Component {
             return <Country    
             click = {() => this.props.clicked(index)}
             name={country.name}
+            position={index}
             population={country.population}
             key={country.id}
             changed={(event) => this.props.changed(event, country.id)}
