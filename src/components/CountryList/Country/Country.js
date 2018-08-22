@@ -26,6 +26,7 @@ class Country extends Component {
         console.log('[Country.js] Inside render()')
         return (
             <div className={classes.Country}>
+            {this.props.authenticated ? <p>Authenticated!</p>:null}
                 <p onClick={this.props.click}> {this.props.population} of people live in {this.props.name}</p>
                 <p> {this.props.children} </p>
                 <input 

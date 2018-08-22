@@ -42,6 +42,8 @@ class App extends PureComponent {
     ],
     showCountries: false,
     toggleClickCounter: 0,
+    authenticated: false
+    
   }
 
   // ########################################## METHODS ################################################ //
@@ -79,6 +81,11 @@ class App extends PureComponent {
     });
   }
 
+  loginHandler = () => {
+    this.setState({authenticated: true});
+
+  }
+
 
  // ########################################## RENDER ################################################ //
   render() {
@@ -89,7 +96,8 @@ class App extends PureComponent {
       countries = <CountryList
         countries={this.state.countries}
         clicked={this.deleteCountryHandler}
-        changed={this.nameChangedHandler} />
+        changed={this.nameChangedHandler}
+        isAuthenticated={this.state.authenticated} />
     }
     
     return (
@@ -99,6 +107,7 @@ class App extends PureComponent {
         appTitle = {this.props.title} 
         showCountries ={this.state.showCountries}
         countries = {this.state.countries}
+        login={this.loginHandler}
         clicked = {this.toggleCountriesHandler} />
         {countries}
       </div>
